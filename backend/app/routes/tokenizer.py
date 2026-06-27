@@ -1,10 +1,11 @@
 from fastapi import APIRouter
 from app.schemas.text_request import TextRequest
+from app.schemas.response_schemas import AnalyzeResponse
 from app.services.tokenizer import Tokenizer
 
 router = APIRouter()
 
-@router.post("/analyze")
+@router.post("/analyze", response_model=AnalyzeResponse)
 def analyze(request: TextRequest):
 
     tokens = Tokenizer.tokenize(request.text)
@@ -14,6 +15,6 @@ def analyze(request: TextRequest):
         "word_count": Tokenizer.word_count(tokens),
         "sentence_count": Tokenizer.sentence_count(request.text),
         "character_count": Tokenizer.character_count(request.text),
-        "unique_words":Tokenizer.unique_words(tokens),
-        "word_frequency":Tokenizer.word_frequency(tokens)
+        "unique_words": Tokenizer.unique_words(tokens),
+        "word_frequency": Tokenizer.word_frequency(tokens)
     }
