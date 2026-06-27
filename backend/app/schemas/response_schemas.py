@@ -44,3 +44,12 @@ class SpellCheckItemV2(BaseModel):
 
 class SpellCheckResponseV2(BaseModel):
     results: list[SpellCheckItemV2]
+
+
+class SpellCheckItemV3(BaseModel):
+    input: str
+    suggestions: list[SpellSuggestionV2] = Field(default_factory=list)
+
+
+class SpellCheckResponseV3(BaseModel):
+    results: list[SpellCheckItemV3]

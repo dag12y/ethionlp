@@ -1,8 +1,9 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
-from app.schemas.response_schemas import SpellCheckResponseV1, SpellCheckResponseV2
+from app.schemas.response_schemas import SpellCheckResponseV1, SpellCheckResponseV2, SpellCheckResponseV3
 from app.services.spell_checker import SpellChecker
 from app.services.spell_checker_v2 import SpellChecker as SpellChecker_V2
+from app.services.spell_checker_ml import SpellCheckerML
 
 router = APIRouter()
 
@@ -33,6 +34,21 @@ def spellcheck_v2(req: SpellRequest):
 
     for w in words:
         results.append(SpellChecker_V2.suggest(w))
+
+    return {
+        "results": results
+    }
+
+
+@router.post("/spellcheck/v3", response_model=SpellCheckResponseV3)
+def spellcheck_v3(req: SpellRequest):
+
+    words = req.text.split()
+
+    results = []
+
+    for w in words:
+        results.append(SpellCheckerML.suggest(w))
 
     return {
         "results": results
