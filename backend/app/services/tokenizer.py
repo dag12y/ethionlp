@@ -1,4 +1,5 @@
 import re
+from collections import Counter
 
 class Tokenizer:
     @staticmethod
@@ -21,4 +22,12 @@ class Tokenizer:
     @staticmethod
     def character_count(text):
         return len(text.replace(" ", ""))
+
+    @staticmethod
+    def unique_words(tokens):
+        return len(set(tokens))
+    
+    @staticmethod
+    def word_frequency(tokens):
+        return Counter(tokens)
 

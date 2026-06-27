@@ -13,5 +13,7 @@ def analyze(request: TextRequest):
         "tokens": tokens,
         "word_count": Tokenizer.word_count(tokens),
         "sentence_count": Tokenizer.sentence_count(request.text),
-        "character_count": Tokenizer.character_count(request.text)
+        "character_count": Tokenizer.character_count(request.text),
+        "unique_words":Tokenizer.unique_words(tokens),
+        "word_frequency":Tokenizer.word_frequency(tokens)
     }
