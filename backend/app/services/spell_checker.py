@@ -21,5 +21,5 @@ class SpellChecker:
 
         return {
             "input": word,
-            "suggestions": suggestions[:3]  # top 3
+            "suggestions": suggestions[:5]  # top 3
         }
